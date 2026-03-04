@@ -1,9 +1,10 @@
+<!-- v26.3.4.1 - Rename to Color Bicone Spectrum, remove UV/IR labels, add EM Spectrum link -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Light Bicone Spectrum | The Geometry of Perception</title>
+    <title>Color Bicone Spectrum | The Geometry of Perception</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
@@ -263,7 +264,6 @@
         }
 
         .badge.visible { background: rgba(76, 175, 80, 0.2); color: #81c784; }
-        .badge.non-visible { background: rgba(255, 152, 0, 0.2); color: #ffb74d; }
 
         .inspector-content {
             display: flex;
@@ -298,6 +298,29 @@
             border: 1px solid var(--glass-border);
             transition: background-color 0.2s ease;
         }
+        .em-spectrum-btn {
+            display: block;
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            width: 320px;
+        }
+
+        .em-spectrum-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
         /* Version Display */
         #version-display {
             position: fixed;
@@ -414,6 +437,10 @@
                 padding: 1rem;
             }
 
+            .em-spectrum-btn {
+                width: 100%;
+            }
+
             #version-display {
                 font-size: 0.7rem;
                 bottom: 5px;
@@ -429,8 +456,8 @@
 <body>
     <div id="container"></div>
     <div id="ui">
-        <h1>Light Bicone Spectrum</h1>
-        <p class="subtitle">A Relativistic Mapping of Perception</p>
+        <h1>Color Bicone Spectrum</h1>
+        <p class="subtitle">Visible Light in 3D Color Space</p>
 
         <div class="toggle-group">
             <button id="legendToggle" class="mobile-toggle">Show Legend</button>
@@ -439,7 +466,7 @@
 
         <div class="legend" id="mainLegend">
             <div class="section">
-                <p class="section-label">Spacetime Mapping</p>
+                <p class="section-label">Color Space Geometry</p>
                 <div class="legend-item">
                     <span class="label">Vertical Axis (Y)</span>
                     <span class="value">Brightness</span>
@@ -450,23 +477,23 @@
                 </div>
                 <div class="legend-item">
                     <span class="label">Rotation (θ)</span>
-                    <span class="value">Hue / Variety</span>
+                    <span class="value">Hue / Color Angle</span>
                 </div>
             </div>
 
             <div class="section">
-                <p class="section-label">Spectral Limits</p>
+                <p class="section-label">Brightness Axis</p>
                 <div class="legend-item">
-                    <span class="label">Future / Approach (UV)</span>
-                    <span class="value">Higher Energy / White</span>
+                    <span class="label">Top Apex</span>
+                    <span class="value">White (Max Brightness)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="label">Present (Visible)</span>
-                    <span class="value">Max Saturation / Coordination</span>
+                    <span class="label">Equator</span>
+                    <span class="value">Pure Colors (Full Saturation)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="label">Past / Recession (IR)</span>
-                    <span class="value">Lower Energy / Black</span>
+                    <span class="label">Bottom Apex</span>
+                    <span class="value">Black (Min Brightness)</span>
                 </div>
             </div>
         </div>
@@ -480,8 +507,8 @@
 
                 <p class="section-label">Jump to Spectral Point</p>
                 <div class="preset-grid">
-                    <button class="preset-btn" data-type="apex" data-value="top" title="UV / Future">Top Apex</button>
-                    <button class="preset-btn" data-type="apex" data-value="bottom" title="IR / Past">Bottom Apex</button>
+                    <button class="preset-btn" data-type="apex" data-value="top" title="White / Max Brightness">Top Apex</button>
+                    <button class="preset-btn" data-type="apex" data-value="bottom" title="Black / Min Brightness">Bottom Apex</button>
                     <button class="preset-btn color-btn" data-type="color" data-value="red" style="background: #ff0000;"></button>
                     <button class="preset-btn color-btn" data-type="color" data-value="yellow" style="background: #ffff00;"></button>
                     <button class="preset-btn color-btn" data-type="color" data-value="green" style="background: #00ff00;"></button>
@@ -494,6 +521,8 @@
             </div>
 
             <!-- Inspector Panel -->
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; pointer-events: auto;">
+            <a href="https://em-spectrum.vercel.app" target="_blank" class="em-spectrum-btn">Full Electromagnetic Spectrum ↗</a>
             <div id="inspector" class="glass-panel">
                 <div class="inspector-header">
                     <h3>Point Inspector</h3>
@@ -515,11 +544,12 @@
                 </div>
                 <div class="color-preview" id="colorPreview"></div>
             </div>
+            </div>
         </div>
     </div>
 
     <!-- Version Display -->
-    <div id="version-display">Version 26.2.2 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
+    <div id="version-display">Version 26.3.4.1 &nbsp;|&nbsp; Made by <a href="https://www.jordonhgriffin.com" target="_blank">JHG</a></div>
 
     <script type="module">
         import * as THREE from 'three';
@@ -725,25 +755,15 @@
             const hex = `#${rgb.map(x => x.toString(16).padStart(2, '0')).join('')}`;
 
             let wavelength = "---";
-            let status = "Visible";
-            let badgeClass = "visible";
+            const status = "Visible";
+            const badgeClass = "visible";
 
-            if (yNorm > 0.05) {
-                status = "Ultraviolet";
-                badgeClass = "non-visible";
-                wavelength = `< 380`;
-            } else if (yNorm < -0.05) {
-                status = "Infrared";
-                badgeClass = "non-visible";
-                wavelength = `> 750`;
+            if (hue > 0.83) {
+                wavelength = "Nonspectral";
             } else {
-                if (hue > 0.83) {
-                    wavelength = "Nonspectral";
-                } else {
-                    const spectralHue = hue / 0.83;
-                    const nm = Math.round(750 - (spectralHue * (750 - 380)));
-                    wavelength = `${nm}`;
-                }
+                const spectralHue = hue / 0.83;
+                const nm = Math.round(750 - (spectralHue * (750 - 380)));
+                wavelength = `${nm}`;
             }
             return { hex, rgb, wavelength, status, badgeClass };
         }
