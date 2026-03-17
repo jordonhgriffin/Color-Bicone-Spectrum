@@ -1,4 +1,4 @@
-<!-- v26.3.9.1 - link address -->
+<!-- v26.3.17.1 - moved EM spectrum link and point inspector into controls panel -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +61,7 @@
             padding: 2rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
 
         h1 {
@@ -130,25 +130,32 @@
             color: var(--text-secondary);
         }
 
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            width: fit-content;
+        }
+
         .bottom-bar {
             display: flex;
-            align-items: flex-end;
-            gap: 1.5rem;
+            align-items: flex-start;
             pointer-events: none;
             width: 100%;
+            margin-top: 1rem;
         }
 
         .controls {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
             pointer-events: auto;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: 12px;
-            width: 300px;
+            width: 100%;
         }
 
         .playback-controls {
@@ -231,12 +238,11 @@
         }
 
         .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            width: 320px;
+            background: transparent;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            width: 100%;
             pointer-events: auto;
         }
 
@@ -301,19 +307,18 @@
         .em-spectrum-btn {
             display: block;
             text-align: center;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--glass-border);
             color: var(--text-primary);
             padding: 0.7rem 1rem;
-            border-radius: 12px;
+            border-radius: 8px;
             font-family: 'Outfit', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
             text-decoration: none;
             letter-spacing: 0.03em;
             transition: background 0.2s ease, border-color 0.2s ease;
-            width: 320px;
+            width: 100%;
         }
 
         .em-spectrum-btn:hover {
@@ -456,6 +461,7 @@
 <body>
     <div id="container"></div>
     <div id="ui">
+        <div class="left-col">
         <h1>Color Bicone Spectrum</h1>
         <p class="subtitle">Visible Light in 3D Color Space</p>
 
@@ -500,6 +506,30 @@
 
         <div class="bottom-bar">
             <div class="controls" id="mainControls">
+                <!-- Inspector Panel -->
+                <a href="https://electromagnetic-spectrum.jordonhgriffin.com" target="_blank" class="em-spectrum-btn">Full Electromagnetic Spectrum ↗</a>
+                <div id="inspector" class="glass-panel">
+                    <div class="inspector-header">
+                        <h3>Point Inspector</h3>
+                        <span id="visibilityBadge" class="badge">Hover to inspect</span>
+                    </div>
+                    <div class="inspector-content">
+                        <div class="data-row">
+                            <span class="data-label">HEX</span>
+                            <span id="hexValue" class="data-value">#------</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">RGB</span>
+                            <span id="rgbValue" class="data-value">---, ---, ---</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Wavelength</span>
+                            <span id="nmValue" class="data-value">--- nm</span>
+                        </div>
+                    </div>
+                    <div class="color-preview" id="colorPreview"></div>
+                </div>
+
                 <div class="playback-controls">
                     <button id="toggleRotation">Pause Rotation</button>
                     <button id="resetRotation">Reset View</button>
@@ -519,37 +549,12 @@
 
                 <p class="hint">Click and drag to rotate. Scroll to zoom.</p>
             </div>
-
-            <!-- Inspector Panel -->
-            <div style="display: flex; flex-direction: column; gap: 0.75rem; pointer-events: auto;">
-            <a href="https://electromagnetic-spectrum.jordonhgriffin.com" target="_blank" class="em-spectrum-btn">Full Electromagnetic Spectrum ↗</a>
-            <div id="inspector" class="glass-panel">
-                <div class="inspector-header">
-                    <h3>Point Inspector</h3>
-                    <span id="visibilityBadge" class="badge">Hover to inspect</span>
-                </div>
-                <div class="inspector-content">
-                    <div class="data-row">
-                        <span class="data-label">HEX</span>
-                        <span id="hexValue" class="data-value">#------</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">RGB</span>
-                        <span id="rgbValue" class="data-value">---, ---, ---</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Wavelength</span>
-                        <span id="nmValue" class="data-value">--- nm</span>
-                    </div>
-                </div>
-                <div class="color-preview" id="colorPreview"></div>
-            </div>
-            </div>
+        </div>
         </div>
     </div>
 
     <!-- Version Display -->
-    <div id="version-display">Version 26.3.9.1 &nbsp;|&nbsp; Made by <a href="https://www.jordonhgriffin.com" target="_blank">JHG</a></div>
+    <div id="version-display">Version 26.3.17.1 &nbsp;|&nbsp; Made by <a href="https://www.jordonhgriffin.com" target="_blank">JHG</a></div>
 
     <script type="module">
         import * as THREE from 'three';
